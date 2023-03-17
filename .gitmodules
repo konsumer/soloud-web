@@ -1,0 +1,7 @@
+[submodule "soloud"]
+	path = soloud
+	url = https://github.com/jarikomppa/soloud.git
+
+[submodule "openmpt"]
+	path = openmpt
+	url = https://github.com/OpenMPT/openmpt.git
