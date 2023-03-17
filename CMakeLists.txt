@@ -16,6 +16,9 @@ add_library(${PROJECT_NAME} SHARED
   soloud/src/backend/sdl2_static/soloud_sdl2_static.cpp
   soloud/src/c_api/soloud_c.cpp
 
+  # this uses a DLL and will not work in wasm
+  soloud/src/audiosource/openmpt/soloud_openmpt_dll.c
+
   soloud/src/core/soloud.cpp
   soloud/src/core/soloud_audiosource.cpp
   soloud/src/core/soloud_bus.cpp
@@ -71,14 +74,12 @@ add_library(${PROJECT_NAME} SHARED
   soloud/src/filter/soloud_waveshaperfilter.cpp
 
   openmpt/include/stb_vorbis/stb_vorbis.c
-
-  openmpt/libopenmpt/libopenmpt_c.cpp
-
-
 )
 target_include_directories(${PROJECT_NAME} PUBLIC soloud/include)
 target_include_directories(${PROJECT_NAME} PUBLIC stb/include)
 target_include_directories(${PROJECT_NAME} PUBLIC .)
+target_include_directories(${PROJECT_NAME} PUBLIC openmpt/)
 target_include_directories(${PROJECT_NAME} PUBLIC openmpt/src/)
+target_include_directories(${PROJECT_NAME} PUBLIC openmpt/common/)
 target_compile_definitions(${PROJECT_NAME} PUBLIC WITH_SDL2_STATIC)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
