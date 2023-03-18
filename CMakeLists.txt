@@ -12,7 +12,8 @@ set (CMAKE_CXX_STANDARD 17)
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
-add_library(${PROJECT_NAME} STATIC
+add_executable(${PROJECT_NAME}
+  main.c
   soloud/src/backend/sdl2_static/soloud_sdl2_static.cpp
   soloud/src/c_api/soloud_c.cpp
 
@@ -76,9 +77,8 @@ add_library(${PROJECT_NAME} STATIC
   openmpt/include/stb_vorbis/stb_vorbis.c
 )
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Emscripten")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s MODULARIZE -s EXPORT_ES6 -s USE_SDL=2")
-endif()
+# --no-entry -sSTANDALONE_WASM=1 -sERROR_ON_UNDEFINED_SYMBOLS=0
+SET(EMS_OPTS "-s USE_SDL=2 -sSTANDALONE_WASM=1 -sERROR_ON_UNDEFINED_SYMBOLS=0")
 
 target_include_directories(${PROJECT_NAME} PUBLIC soloud/include)
 target_include_directories(${PROJECT_NAME} PUBLIC stb/include)

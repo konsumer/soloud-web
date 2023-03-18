@@ -7,7 +7,7 @@ git clone --recursive git@github.com:konsumer/soloud-web.git
 cd soloud-web
 ```
 
-## native dynlib
+## native exe (for testing)
 
 ```
 cmake -B build

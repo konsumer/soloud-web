@@ -1,0 +1,18 @@
+<h1>Web Soloud</h1>
+
+<p>This is a simple tester. Click the button to start the engine and play some TTS.</p>
+<button id="fire">FIRE</button>
+
+<script type="module">
+import soloud from './soloud.js'
+
+// load wasm from fetch
+const bytes = await fetch('build/WebSoloud.wasm').then(r => r.arrayBuffer())
+const s = await soloud(bytes)
+
+const fire = document.getElementById('fire')
+
+fire.addEventListener('click', () => {
+  s.tts('fire!!!')
+})
+</script>
